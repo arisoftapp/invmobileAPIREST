@@ -5,6 +5,8 @@ const server = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const config = require('./config');
+let empresa = "demo";
+
 
 server.use(cors({ credentials: true, origin: true }));
 //settings
@@ -16,8 +18,9 @@ server.use(morgan('dev'));
 server.use(bodyParser.json());
 // Rutas
 //require('./routes/authenticate')(server);
+require('./routes/almacenes')(server);
 
 
 server.listen(server.get('port'), () => {
-    console.log("VIPCell-WS Started successfuly in the port 3002");
+    console.log(empresa + " Started successfuly in the port " + port);
 });
