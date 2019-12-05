@@ -10,8 +10,8 @@ let empresa = "demo";
 
 server.use(cors({ credentials: true, origin: true }));
 //settings
-const port = process.env.PORT || 3010; //Puerto de VIP Cell
-server.set('port', process.env.PORT || 3010);
+const port = process.env.PORT || 3011; //Puerto de VIP Cell
+server.set('port', process.env.PORT || 3011);
 //server.set('secret', config.secret);
 //middleware
 server.use(morgan('dev'));
