@@ -19,6 +19,7 @@ server.use(bodyParser.json());
 // Rutas
 //require('./routes/authenticate')(server);
 require('./routes/almacenes')(server);
+require('./routes/conteo')(server);
 
 
 server.listen(server.get('port'), () => {
