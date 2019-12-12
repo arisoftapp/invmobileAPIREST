@@ -21,7 +21,7 @@ module.exports = function(app) {
                     res.json({
                         success: true,
                         mensaje: "¡Consulta con exito!",
-                        almacenes: data,
+                        datos: data,
                     });
                 }
             }
