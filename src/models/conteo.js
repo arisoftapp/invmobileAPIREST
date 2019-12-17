@@ -30,5 +30,30 @@ conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
         });
     }
 };
-
+conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
+    if (dbCOBOL) {
+        dbCOBOL.query(`SELECT 
+            EXI_ACT as 'existenciaActual'
+                    FROM
+                    PUBLIC.INVEXI, 
+                    PUBLIC.INVART
+                 WHERE 
+                 PUBLIC.INVART.ART_COD1= '` + codigoProducto + `'
+                 AND PUBLIC.INVEXI.EXI_ART=ART_COD1
+                 AND PUBLIC.INVEXI.EXI_ALM='` + idalmacen + `'
+                 OR
+                 PUBLIC.INVART.ART_COD2= '` + codigoProducto + `'
+                 AND PUBLIC.INVEXI.EXI_ART=ART_COD1
+                 AND PUBLIC.INVEXI.EXI_ALM='` + idalmacen + `'
+                 `, function(err, rows, moreResultSets) {
+            if (err) {
+                //console.log(err);
+                callback(err, rows);
+                throw err;
+            } else {
+                callback(null, rows);
+            }
+        });
+    }
+};
 module.exports = conteo;
