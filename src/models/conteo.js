@@ -33,7 +33,8 @@ conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
 conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
     if (dbCOBOL) {
         dbCOBOL.query(`SELECT 
-            EXI_ACT as 'existenciaActual'
+            EXI_ACT as 'existenciaActual',
+            ART_SER AS 'serie'
                     FROM
                     PUBLIC.INVEXI, 
                     PUBLIC.INVART
