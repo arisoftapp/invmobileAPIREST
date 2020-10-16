@@ -1,8 +1,8 @@
 let dbCOBOL = require('../dbMacro');
 let conteo = {};
 conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
             ART_COD1 as 'codigo',
             ART_COD2 as 'codigo2',
             ART_DESC1 AS 'descripcion',
@@ -26,10 +26,15 @@ conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
             }
         });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 conteo.geteximacro2 = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
             ART_COD1 as 'codigo',
             ART_COD2 as 'codigo2',
             ART_DESC1 AS 'descripcion',
@@ -53,10 +58,15 @@ conteo.geteximacro2 = (idalmacen, codigoProducto, callback) => {
             }
         });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
             EXI_ACT as 'existenciaActual',
             ART_SER AS 'serie'
                     FROM
@@ -76,10 +86,15 @@ conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
             }
         });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 conteo.getsoloexiact2 = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
             EXI_ACT as 'existenciaActual',
             ART_SER AS 'serie'
                     FROM
@@ -99,11 +114,16 @@ conteo.getsoloexiact2 = (idalmacen, codigoProducto, callback) => {
             }
         });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 conteo.getSoloExistencia = (idalmacen,callback) => {
     //console.log(idalmacen);
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
         c.ART_DESC1 AS 'descripcion',
@@ -128,6 +148,11 @@ conteo.getSoloExistencia = (idalmacen,callback) => {
                 callback(null, rows);
             }
         }); 
+    }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
     }
 };
 module.exports = conteo;

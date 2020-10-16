@@ -2,8 +2,8 @@ let dbCOBOL = require('../dbMacro');
 let clfModel = {};
 
 clfModel.getClf = (callback) => {
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
         CLF_LLAVE AS 'id_clf',
         CLF_DESC AS 'descripcion',
         CLF_NIV AS 'nivel'
@@ -18,11 +18,16 @@ clfModel.getClf = (callback) => {
             }
         });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 clfModel.getConteoClf = (idalmacen,clf,callback) => {
     console.log(idalmacen+" "+clf);
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
         c.ART_DESC1 AS 'descripcion',
@@ -49,11 +54,16 @@ clfModel.getConteoClf = (idalmacen,clf,callback) => {
             }
         }); 
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 clfModel.getConteoClfNivel = (idalmacen,clf,callback) => {
     console.log(idalmacen+" "+clf.length);
-    if (dbCOBOL) {
-        dbCOBOL.query(`SELECT 
+    if (dbCOBOL.base.connected==true) {
+        dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
         c.ART_DESC1 AS 'descripcion',
@@ -79,6 +89,11 @@ clfModel.getConteoClfNivel = (idalmacen,clf,callback) => {
                 callback(null, rows);
             }
         }); 
+    }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
     }
 };
 module.exports = clfModel;

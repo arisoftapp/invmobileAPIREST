@@ -2,9 +2,9 @@ let dbCOBOL = require('../dbMacro');
 let model = {};
 
 model.getSerie = (serie,codigo, callback) => {
-    if (dbCOBOL) {
+    if (dbCOBOL.base.connected==true) {
         //console.log(serie);
-			dbCOBOL.query(`SELECT 
+			dbCOBOL.base.query(`SELECT 
             SER_ALM AS 'almacen',
             SER_F_VEN AS 'Fventa'
                     FROM
@@ -22,12 +22,17 @@ model.getSerie = (serie,codigo, callback) => {
                 }
 		    });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
 };
 model.getSeries = (codigo,almacen, callback) => {
-    if (dbCOBOL) {
+    if (dbCOBOL.base.connected==true) {
         //console.log(codigo);
         //console.log(almacen);
-			dbCOBOL.query(`SELECT 
+			dbCOBOL.base.query(`SELECT 
             SER_ALM AS 'almacen',
             SER_NUM AS 'serie'
                     FROM
@@ -46,5 +51,11 @@ model.getSeries = (codigo,almacen, callback) => {
                 }
 		    });
     }
+    else
+    {
+        dbCOBOL.conexion.abrir();
+        callback("conexion cerrada, intentar de nuevo",null);
+    }
+
 };
 module.exports = model;
