@@ -4,8 +4,11 @@ var connectionString = "DSN=Macro;UID=system;PWD=manager;DATABASE=DEMOINT";
 var db = new odbc.Database();
 db.open(connectionString, function(err) {
     if (err) {
-        console.log('SERVIDOR MACROPRO NO RESPONDE - VERIFIQUE QUE ESTE ENCENDIDO');
+        console.log('SERVIDOR MACROPRO NO RESPONDE - VERIFIQUE QUE ESTE ENCENDIDO '+err);
         throw err;
+    }
+    else{
+        console.log('open abierta');
     };
 
     /*

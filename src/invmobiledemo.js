@@ -16,11 +16,17 @@ server.set('port', process.env.PORT || 3011);
 //middleware
 server.use(morgan('dev'));
 server.use(bodyParser.json());
+server.get('/reiniciar', (req, res) => {
+
+        throw err;           
+});
 // Rutas
 //require('./routes/authenticate')(server);
 require('./routes/almacenes')(server);
 require('./routes/conteo')(server);
-
+require('./routes/series')(server);
+require('./routes/guardarConteo')(server);
+require('./routes/clasificaciones')(server);
 
 server.listen(server.get('port'), () => {
     console.log(empresa + " Started successfuly in the port " + port);
