@@ -10,7 +10,7 @@ module.exports = function(app) {
                     success: false,
                     message: 'Error al consultar series:' + err
                 });
-
+                process.exit(0);
             } else {
                 if (data.length < 1) {
                     res.json({
@@ -37,7 +37,7 @@ module.exports = function(app) {
                     success: false,
                     message: 'Error al consultar series:' + err
                 });
-
+                process.exit(0);
             } else {
                 if (data.length < 1) {
                     res.json({

@@ -1,7 +1,22 @@
 let dbCOBOL = require('../dbMacro');
 let conteo = {};
-conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL.base.connected==true) {
+conteo.geteximacro = async function(idalmacen, codigoProducto, callback){
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
             ART_COD1 as 'codigo',
             ART_COD2 as 'codigo2',
@@ -20,7 +35,7 @@ conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -28,12 +43,27 @@ conteo.geteximacro = (idalmacen, codigoProducto, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-conteo.geteximacro2 = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL.base.connected==true) {
+conteo.geteximacro2 =async function (idalmacen, codigoProducto, callback)  {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
             ART_COD1 as 'codigo',
             ART_COD2 as 'codigo2',
@@ -52,7 +82,7 @@ conteo.geteximacro2 = (idalmacen, codigoProducto, callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -60,12 +90,27 @@ conteo.geteximacro2 = (idalmacen, codigoProducto, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL.base.connected==true) {
+conteo.getsoloexiact = async function(idalmacen, codigoProducto, callback){
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
             EXI_ACT as 'existenciaActual',
             ART_SER AS 'serie'
@@ -80,7 +125,7 @@ conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -88,12 +133,27 @@ conteo.getsoloexiact = (idalmacen, codigoProducto, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-conteo.getsoloexiact2 = (idalmacen, codigoProducto, callback) => {
-    if (dbCOBOL.base.connected==true) {
+conteo.getsoloexiact2 = async function(idalmacen, codigoProducto, callback) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
             EXI_ACT as 'existenciaActual',
             ART_SER AS 'serie'
@@ -108,7 +168,7 @@ conteo.getsoloexiact2 = (idalmacen, codigoProducto, callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -116,13 +176,28 @@ conteo.getsoloexiact2 = (idalmacen, codigoProducto, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-conteo.getSoloExistencia = (idalmacen,callback) => {
+conteo.getSoloExistencia = async function(idalmacen,callback)  {
     //console.log(idalmacen);
-    if (dbCOBOL.base.connected==true) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
@@ -142,7 +217,7 @@ conteo.getSoloExistencia = (idalmacen,callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             }
             else {
                 callback(null, rows);
@@ -151,7 +226,7 @@ conteo.getSoloExistencia = (idalmacen,callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };

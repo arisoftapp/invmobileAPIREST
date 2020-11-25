@@ -1,8 +1,23 @@
 let dbCOBOL = require('../dbMacro');
 let almacenModel = {};
 
-almacenModel.getAlmacenes = (callback) => {
-    if (dbCOBOL.base.connected==true) {
+almacenModel.getAlmacenes = async function(callback){
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
         ALM_LLAVE AS 'idalmacen',
         ALM_NOMBRE AS 'almacen'
@@ -11,7 +26,7 @@ almacenModel.getAlmacenes = (callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, null);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -19,7 +34,7 @@ almacenModel.getAlmacenes = (callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };

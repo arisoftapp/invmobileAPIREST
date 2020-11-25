@@ -8,9 +8,9 @@ module.exports = function(app) {
                     success: false,
                     message: 'Error al consultar almacenes:' + err
                 });
-                console.log(err);
-                throw err;
-
+                //console.log(err);
+                //throw err;
+                process.exit(0);
             } else {
                 if (data.length < 1) {
                     res.json({

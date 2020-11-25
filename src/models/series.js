@@ -1,8 +1,23 @@
 let dbCOBOL = require('../dbMacro');
 let model = {};
 
-model.getSerie = (serie,codigo, callback) => {
-    if (dbCOBOL.base.connected==true) {
+model.getSerie = async function(serie,codigo, callback) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         //console.log(serie);
 			dbCOBOL.base.query(`SELECT 
             SER_ALM AS 'almacen',
@@ -15,7 +30,7 @@ model.getSerie = (serie,codigo, callback) => {
                 if (err) {
                     //console.log(err);
                     callback(err);
-                    throw(err);
+                    //throw(err);
                 }
                 else {
                     callback(null, rows);
@@ -24,12 +39,27 @@ model.getSerie = (serie,codigo, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-model.getSeries = (codigo,almacen, callback) => {
-    if (dbCOBOL.base.connected==true) {
+model.getSeries = async function(codigo,almacen, callback) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         //console.log(codigo);
         //console.log(almacen);
 			dbCOBOL.base.query(`SELECT 
@@ -44,7 +74,7 @@ model.getSeries = (codigo,almacen, callback) => {
                 if (err) {
                     //console.log(err);
                     callback(err);
-                    throw(err);
+                    //throw(err);
                 }
                 else {
                     callback(null, rows);
@@ -53,7 +83,7 @@ model.getSeries = (codigo,almacen, callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 

@@ -1,8 +1,23 @@
 let dbCOBOL = require('../dbMacro');
 let clfModel = {};
 
-clfModel.getClf = (callback) => {
-    if (dbCOBOL.base.connected==true) {
+clfModel.getClf = async function(callback) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
         CLF_LLAVE AS 'id_clf',
         CLF_DESC AS 'descripcion',
@@ -12,7 +27,7 @@ clfModel.getClf = (callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, null);
-                throw err;
+                //throw err;
             } else {
                 callback(null, rows);
             }
@@ -20,13 +35,28 @@ clfModel.getClf = (callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-clfModel.getConteoClf = (idalmacen,clf,callback) => {
+clfModel.getConteoClf = async function(idalmacen,clf,callback) {
     console.log(idalmacen+" "+clf);
-    if (dbCOBOL.base.connected==true) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
@@ -47,7 +77,7 @@ clfModel.getConteoClf = (idalmacen,clf,callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             }
             else {
                 callback(null, rows);
@@ -56,13 +86,28 @@ clfModel.getConteoClf = (idalmacen,clf,callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };
-clfModel.getConteoClfNivel = (idalmacen,clf,callback) => {
+clfModel.getConteoClfNivel = async function(idalmacen,clf,callback) {
+    let result;
+    try {
+        if(dbCOBOL.base.connected==false)
+        {
+            result = await dbCOBOL.conexion.abrir(); 
+        }
+        else
+        {
+            result=true;
+        }
+        
+    } catch (error) {
+        result=false;
+        console.log(error);
+    }
     console.log(idalmacen+" "+clf.length);
-    if (dbCOBOL.base.connected==true) {
+    if (result==true) {
         dbCOBOL.base.query(`SELECT 
         c.ART_COD1 as 'codigo',
         c.ART_COD2 as 'codigo2',
@@ -83,7 +128,7 @@ clfModel.getConteoClfNivel = (idalmacen,clf,callback) => {
             if (err) {
                 //console.log(err);
                 callback(err, rows);
-                throw err;
+                //throw err;
             }
             else {
                 callback(null, rows);
@@ -92,7 +137,7 @@ clfModel.getConteoClfNivel = (idalmacen,clf,callback) => {
     }
     else
     {
-        dbCOBOL.conexion.abrir();
+        //dbCOBOL.conexion.abrir();
         callback("conexion cerrada, intentar de nuevo",null);
     }
 };

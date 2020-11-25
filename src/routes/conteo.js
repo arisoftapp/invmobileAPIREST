@@ -10,6 +10,7 @@ module.exports = function(app) {
                     success: false,
                     mensaje: 'Error al consultar codigo:' + err
                 });
+                process.exit(0);
 
             } else {
                 if (data.length < 1) {
@@ -60,6 +61,7 @@ module.exports = function(app) {
                     success: false,
                     mensaje: 'Error al consultar existencia:' + err
                 });
+                process.exit(0);
 
             } else {
                 if (data.length < 1) {
@@ -108,6 +110,7 @@ module.exports = function(app) {
                     success: false,
                     mensaje: 'Error al consultar existencia:' + err
                 });
+                process.exit(0);
 
             } else {
                 if (data.length < 1) {
